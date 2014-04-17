@@ -52,7 +52,7 @@ void RF24Audio::begin(){
   //delay(500);
   // Set the defined input pins as inputs with pullups high. See http://arduino.cc/en/Tutorial/InputPullupSerial
   #if defined (ENABLE_LED)
-  		pinMode(ledPin,OUTPUT);
+  	pinMode(ledPin,OUTPUT);
   #endif
   pinMode(speakerPin,OUTPUT); 		pinMode(speakerPin2,OUTPUT);
   pinMode(TX_PIN,INPUT_PULLUP);		pinMode(VOL_UP_PIN,INPUT_PULLUP);
@@ -249,6 +249,13 @@ void RF24Audio::receive(){
 		handleButtons();							// Check for external button presses at the default timer0 rate
 	}
 #endif
+
+
+uint64_t RF24Audio::getAddress(byte addressNo){
+
+	return pipes[addressNo];
+
+}
 /*****************************************************************************************************************************/
 /****************************************** Reception (RX) Section ***********************************************************/
 
@@ -267,7 +274,7 @@ void handleRadio(){
 
           TIMSK1 |= _BV(ICIE1);						// Finished, re-enable the interrupt vector that runs this function
       }else{ pauseCntr++; }                         // No payload available, keep track of how many for disabling the speaker
-      if(pauseCntr > 250){							// If we failed to get a payload 250 times, disable the speaker output
+      if(pauseCntr > 50){							// If we failed to get a payload 250 times, disable the speaker output
 		  pauseCntr = 0;							// Reset the failure counter
 		  rampDown();								// Ramp down the speaker (prevention of popping sounds)
 		  streaming = 0;							// Indicate that streaming is stopped
@@ -302,7 +309,7 @@ void handleRadio(){
           		   #if defined (ENABLE_LED)
           		   TCCR0A |= _BV(COM0A1);			// Enable the LED visualization output
           		   #endif
-
+				   break;
 
         }
         TIMSK1 |= _BV(ICIE1);						// Finished: Re-enable the interrupt that runs this function.

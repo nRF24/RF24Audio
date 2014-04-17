@@ -103,6 +103,23 @@ public:
    */
 	void broadcast(byte radioID);
 
+   /**
+   * Get any of the preset radio addresses
+   *
+   * Useful for listening nodes who wish to create private or additional radio groups
+   * The library has 14 predefined radio addreses. All radios listen/write on the first
+   * two addresses (0,1), and engage a private channel based on the radio number.
+   * Radio 0 listens on address 2, Radio 1 on address 3, etc.
+   *
+   * @code
+   *	uint64_t newAddress = rfAudio.getAddress(3);	// Gets the 3rd defined radio address
+   *    OR
+   *	radio.openReadingPipe(0,rfAudio.getAddress(7)); // Listens on the 7th defined radio address
+   * @endcode
+   * @param addressNo  Numbers 0 through 14 to access any part of the defined address array
+   * @return RadioAddress:  Returns the requested predefined radio address
+   */
+    uint64_t getAddress(byte addressNo);
 
 
 private:
@@ -133,14 +150,19 @@ void RX();
   * @example PrivateChannels.ino
   * This sketch is demonstrates the use of private channels (node-to-node) in a multi-radio group.
   *
-
  */
 
-  /**
-   * @example USB_Audio.ino
-   * This sketch is demonstrates how to interact with the audio library directly using the core
-   * RF24 radio library: http://tmrh20.github.io/RF24/
-   *
+ /**
+  * @example PrivateGroups.ino
+  * This sketch is demonstrates the use of private groups (node-to-custom_groups) in a multi-radio group.
+  *
+ */
+
+ /**
+  * @example USB_Audio.ino
+  * This sketch is demonstrates how to interact with the audio library directly using the core
+  * RF24 radio library: http://tmrh20.github.io/RF24/
+  *
  */
 
  /**
@@ -159,7 +181,7 @@ void RX();
   * @li <b>LED Indicator/Visualization:</b> Indicates audio playback and amplitude.
   * @li <b>Customization:</b> Using the underlying RF24 core library allows custom interaction with audio devices running this library. Receive audio data
   *        and stream it to a PC over USB, create and broadcast computer generated audio in realtime, and more! See the <a href="examples.html">USB_Audio example</a> for more info.
-  * @li <b>Coming Soon: Create additional node groups:</b> Allows nodes to join private broadcast groups, and multicast only within their group as desired.
+  * @li <b>Create additional node groups:</b> Allows nodes to join private broadcast groups, and multicast only within their group as desired. See advanced section below.
   * @section More How to learn more
   *
   * @li <a href="classRF24Audio.html">Library Class Documentation</a>
@@ -194,15 +216,14 @@ void RX();
   *
   * @section Advanced Advanced Usage
   *
-  * The radio pipes are defined as follows. For more complex multicast scenarios, radios can listen on any combination of pipes.
-  * const uint64_t pipes[12] = { 0xABCDABCD71LL, 0x544d52687CLL, 0x544d526832LL, 0x544d52683CLL,0x544d526846LL, 0x544d526850LL,0x544d52685ALL, 0x544d526820LL, 0x544d52686ELL, 0x544d526878LL, 0x544d526828LL, 0x544d526864LL};
-  *
-  * By default, all radios listen will open the same reading pipes on the first two addresses.
-  * Any radio that wishes to transmit, will reverse the addresses, on the first two pipes, and begin to transmit to all the other nodes
-  * Every radio will automatically be assigned the first two addresses, then one of the remaining addresses as a private channel, based on its radio number (0 = pipes[2], 1 = pipes[3])
-  * eg:
+  * The radio pipes are defined as follows. For more complex multicast scenarios, radios can listen on any combination of pipes. <br>
+  * Use the getAddress(); function to access the address array.<br>
   * @code
-  *
-  *
+  * const uint64_t pipes[14] = { 0xABCDABCD71LL, 0x544d52687CLL, 0x544d526832LL, 0x544d52683CLL,0x544d526846LL, 0x544d526850LL,0x544d52685ALL, 0x544d526820LL, 0x544d52686ELL, 0x544d52684BLL, 0x544d526841LL, 0x544d526855LL,0x544d52685FLL,0x544d526869LL};
   * @endcode
+  * By default, all radios will open the same reading & writing pipes on the first two addresses.<br>
+  * Any radio that wishes to transmit, will reverse the addresses on the first two pipes, and begin to transmit to all the other nodes. <br>
+  * Every radio will automatically be assigned the first two addresses, then one of the remaining addresses as a private channel, based on its radio number: <br> (0 = pipes[2], 1 = pipes[3]) <br>
+  *
+  * Additional addresses can be added by modifying the address array listed in userConfig.h
   */

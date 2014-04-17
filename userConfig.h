@@ -61,16 +61,16 @@
   #if !defined (speakerPin2)
 	#define speakerPin2 10
   #endif
-#endif
+
   #if defined (ENABLE_LED)
     #define ledPin 6
   #endif
-
+#endif
 
 
 //********Radio Defines ****************************
 // Radio pipe addresses for the 2 nodes to communicate.
-const uint64_t pipes[12] = { 0xABCDABCD71LL, 0x544d52687CLL, 0x544d526832LL, 0x544d52683CLL,0x544d526846LL, 0x544d526850LL,0x544d52685ALL, 0x544d526820LL, 0x544d52686ELL, 0x544d526878LL, 0x544d526828LL, 0x544d526864LL};
+const uint64_t pipes[14] = { 0xABCDABCD71LL, 0x544d52687CLL, 0x544d526832LL, 0x544d52683CLL,0x544d526846LL, 0x544d526850LL,0x544d52685ALL, 0x544d526820LL, 0x544d52686ELL, 0x544d52684BLL, 0x544d526841LL, 0x544d526855LL,0x544d52685FLL,0x544d526869LL};
 
 
 
