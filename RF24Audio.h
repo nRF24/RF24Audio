@@ -25,7 +25,7 @@ class RF24Audio
 public:
   /**
    * Setup the radio and radio identifier
-   * @note The radio identifier is only required if utilizing private node-to-node communication as
+   * @note Changing radioNum is only required if utilizing private node-to-node communication as
    * opposed to broadcasting to the entire radio group
    *
    * @code
@@ -61,7 +61,7 @@ public:
   /**
    * Volume Control
    * @code
-   *	rfAudio.volume(4); // Set the volume to mid-level
+   *	rfAudio.setVolume(4); // Set the volume to mid-level
    * @endcode
    * @param vol Set at 0 to 7 for range of volume control
    *
@@ -126,7 +126,6 @@ private:
 	RF24& radio;
 	void timerStart();
 };
-
 
 void TX();
 void RX();
@@ -202,7 +201,7 @@ void RX();
   * #define ANALOG_PIN A0                         //The pin that analog readings will be taken from (microphone pin)
   * @endcode
   *
-  * <b>Pin Assignments:</b>
+  * <b>Pin Assignments: See the @link Setup.html @endlink page for wiring diagrams</b>
   * - <b>Speakers:</b> Arduino Uno,Nano,etc: pins 9,10   Arduino Mega: 11,12  (Timer pins cannot be changed, but can use 1 pin and ground)
   * - <b>pin A0:</b> Microphone/Input pin
   * - <b>pin A1:</b> Transmission/Recording Start pin
@@ -210,6 +209,7 @@ void RX();
   * - <b>pin A3:</b> Volume Down
   * - <b>pin A4:</b> Trigger remote recording (Only working with dual devices)
   * - <b>Cannot be changed:</b> LED Pin: Uno,Nano,etc: pin 6  Mega 2560: pin 13 (main LED pin)
+  *
   *
   * See http://arduino.cc/en/Tutorial/InputPullupSerial for info on how to wire the buttons to the pins
   * See userConfig.h to change default pin assignments and options.
@@ -226,4 +226,17 @@ void RX();
   * Every radio will automatically be assigned the first two addresses, then one of the remaining addresses as a private channel, based on its radio number: <br> (0 = pipes[2], 1 = pipes[3]) <br>
   *
   * Additional addresses can be added by modifying the address array listed in userConfig.h
+  *
+  * @page Setup Boards & Wiring
+  * @section Board Wiring
+  * This page displays different options for wiring/board configuration.
+  *
+  * <img src= "images/NRF1.jpg" height=25% width=25%> <br>
+  * Wiring diagram for DIY module connector. May not be needed depending on module:
+  * <img src="images/RF24AudioBasic_LargeAntenna.jpg" height="45%" width="45%">
+  * <img src= "images/NRF2.jpg" height=20% width=20%>
+  * <img src= "images/RF24AudioBasic_SmallAntenna.jpg" height=45% width=45%>
+  * Wiring diagram for SD streaming/multicast using TMRpcm library:
+  * <img src= "images/RF24Audio_FullSD.jpg" height=65% width=65%>
+  *
   */

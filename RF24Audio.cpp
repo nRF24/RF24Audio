@@ -38,6 +38,8 @@ RF24 radi(0,0);
   #define rampMega
 #endif
 
+const byte broadcastVal = 255; // The value for broadcasting to all nodes using the broadcast() command.
+
 /*****************************************************************************************************************************/
 /************************************************* General Section ***********************************************************/
 
@@ -81,7 +83,7 @@ void RF24Audio::begin(){
   timerStart();						   // Get the timer running
   RX();								   // Start listening for transmissions
 
-  #if !defined (MANUAL_BUTTON_HANLDING)
+  #if !defined (MANUAL_BUTTON_HANDLING)
   	TIMSK0 |= _BV(OCIE0B);
   #endif
 }
@@ -111,7 +113,7 @@ void RF24Audio::timerStart(){
 
 }
 
-#if !defined (MANUAL_BUTTON_HANLDING)
+#if !defined (MANUAL_BUTTON_HANDLING)
 
 void handleButtons(){
 
@@ -428,8 +430,6 @@ ISR(TIMER1_OVF_vect){                                      				// This interrupt
 
 
 
-
-
 /*****************************************************************************************************************************/
 /*************************************** Transmission (TX) Section ***********************************************************/
 
@@ -441,7 +441,7 @@ void RF24Audio::broadcast(byte radioID){
 
 	noInterrupts();													// Disable interrupts during change of transmission address
 
-	if(radioID == 255){
+	if(radioID == broadcastVal){
 			radio.openWritingPipe(pipes[1]);						// Use the public multicast pipe
 	}else{
 			radio.openWritingPipe(pipes[radioID + 2]);				// Open a pipe to the specified radio(s). If two or more radios share the same ID,
