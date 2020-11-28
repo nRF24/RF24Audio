@@ -127,7 +127,18 @@ private:
 	void timerStart();
 };
 
+/**
+ * Global helper function to RF24Audio::transmit(). Do not use this directly.
+ * Use RF24Audio::transmit() instead of this function as RF24Audio needs to be
+ * properly setup first.
+ */
 void TX();
+
+/**
+ * Global helper function to RF24Audio::receive(). Do not use this directly.
+ * Use RF24Audio::receive() instead of this function as RF24Audio needs to be
+ * properly setup first.
+ */
 void RX();
 
 #endif
