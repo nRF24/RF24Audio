@@ -171,7 +171,7 @@ void RX();
  /**
   * @example USB_Audio.ino
   * This sketch is demonstrates how to interact with the audio library directly using the core
-  * RF24 radio library: http://tmrh20.github.io/RF24/
+  * RF24 radio library: http://nRF24.github.io/RF24/
   *
  */
 
