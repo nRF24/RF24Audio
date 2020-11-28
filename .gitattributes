@@ -20,6 +20,3 @@
 *.PDF	 diff=astextplain
 *.rtf	 diff=astextplain
 *.RTF	 diff=astextplain
-
-# ignore docs folder
-docs/
