@@ -19,7 +19,7 @@ jobs:
       run: |
         mkdir docs
         touch doxygenAction
-        echo "PROJECT_NUMBER = v1.0.${{ github.sha:32:40 }}" >> doxygenAction
+        echo "PROJECT_NUMBER = v1.0.${GITHUB_SHA:32:40}" >> doxygenAction
         echo "@INCLUDE = doxygenAction" >> Doxyfile
     - name: build doxygen
       uses: mattnotmitt/doxygen-action@v1
