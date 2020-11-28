@@ -230,7 +230,21 @@ void RX();
   * The radio pipes are defined as follows. For more complex multicast scenarios, radios can listen on any combination of pipes. <br>
   * Use the getAddress(); function to access the address array.<br>
   * @code
-  * const uint64_t pipes[14] = { 0xABCDABCD71LL, 0x544d52687CLL, 0x544d526832LL, 0x544d52683CLL,0x544d526846LL, 0x544d526850LL,0x544d52685ALL, 0x544d526820LL, 0x544d52686ELL, 0x544d52684BLL, 0x544d526841LL, 0x544d526855LL,0x544d52685FLL,0x544d526869LL};
+  * const uint64_t pipes[14] = {0xABCDABCD71LL,
+  *                             0x544d52687CLL,
+  *                             0x544d526832LL,
+  *                             0x544d52683CLL,
+  *                             0x544d526846LL,
+  *                             0x544d526850LL,
+  *                             0x544d52685ALL,
+  *                             0x544d526820LL,
+  *                             0x544d52686ELL,
+  *                             0x544d52684BLL,
+  *                             0x544d526841LL,
+  *                             0x544d526855LL,
+  *                             0x544d52685FLL,
+  *                             0x544d526869LL
+  *                            };
   * @endcode
   * By default, all radios will open the same reading & writing pipes on the first two addresses.<br>
   * Any radio that wishes to transmit, will reverse the addresses on the first two pipes, and begin to transmit to all the other nodes. <br>
