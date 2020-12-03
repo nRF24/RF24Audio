@@ -1,4 +1,4 @@
-# Arduino Wireless Audio/Data Library
+# Arduino Wireless PWM/ADC Audio/Data Library
 
 This library allows streaming of data/audio from analog inputs via NRF24L01 radio modules
 See the [documentation section](http://nRF24.github.io/RF24Audio) for more info.
