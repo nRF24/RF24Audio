@@ -215,4 +215,5 @@ pip-log.txt
 .mr.developer.cfg
 
 # ignore docs folder
-docs/
+docs/html/
+docs/xml/
