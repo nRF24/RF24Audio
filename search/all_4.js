@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['setvolume_10',['setVolume',['../classRF24Audio.html#af379c3a3d32de245746ecb6c27ec8e2c',1,'RF24Audio']]]
+  ['getaddress_7',['getAddress',['../classRF24Audio.html#ad363ce01b8ff0a3e8c7e60f9caa9c43e',1,'RF24Audio']]]
 ];
