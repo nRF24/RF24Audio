@@ -39,7 +39,7 @@ RF24Audio rfAudio(radio,0);	// Set up the audio using the radio, and set to radi
                                 // in a multi-node radio group. See the private
 
 void setup() {			
-
+  Serial.begin(115200);
   rfAudio.begin();		// The only thing to do is initialize the library.
 
 }
