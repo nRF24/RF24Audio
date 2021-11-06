@@ -20,3 +20,7 @@
 *.PDF	 diff=astextplain
 *.rtf	 diff=astextplain
 *.RTF	 diff=astextplain
+
+# doxygen generated files
+docs/html/
+docs/xml/
