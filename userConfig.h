@@ -12,7 +12,7 @@
  * Maximum Quality: Sample rate 44000, RF_SPEED RF24_2MBPS
  * @note 44khz+ sample rate requires 8-bits per sample
  */
-#define SAMPLE_RATE 24000
+#define SAMPLE_RATE 16000
 
 /**
  * @brief configure the RF data rate
