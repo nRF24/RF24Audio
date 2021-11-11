@@ -535,9 +535,9 @@ void TX()
     #if defined (ENABLE_LED)
     TCCR0A &= ~_BV(COM0A1);               // Disable LED visualization
     #endif
+    radi.stopListening();                 // Enter transmit mode on the radio
     radi.openWritingPipe(pipes[1]);       // Set up reading and writing pipes
     radi.openReadingPipe(1,pipes[0]);
-    radi.stopListening();                 // Enter transmit mode on the radio
 
 
     streaming = 0; buffCount = 0; buffEmpty[0] = 1; buffEmpty[1] = 1;   //Set some variables
