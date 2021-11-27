@@ -17,7 +17,7 @@
 #include <userConfig.h>
 
 //******* General Variables ************************
-
+#define RESOLUTION_BASE ((F_CPU) / 10)
 volatile boolean buffEmpty[2] = {true, true}, whichBuff = false, a, lCntr=0, streaming = 0, transmitting = 0;
 volatile byte buffCount = 0;
 volatile byte pauseCntr = 0;
@@ -118,7 +118,7 @@ void RF24Audio::setVolume(char vol)
 
 void RF24Audio::timerStart()
 {
-    ICR1 = 10 * (1600000 / SAMPLE_RATE);               //Timer will count up to this value from 0;
+    ICR1 = 10 * (RESOLUTION_BASE / SAMPLE_RATE);               //Timer will count up to this value from 0;
     TCCR1A = _BV(COM1A1) | _BV(COM1B0) | _BV(COM1B1);  //Enable the timer port/pin as output
     TCCR1A |= _BV(WGM11);                              //WGM11,12,13 all set to 1 = fast PWM/w ICR TOP
     TCCR1B = _BV(WGM13) | _BV(WGM12) | _BV(CS10);      //CS10 = no prescaling
@@ -344,9 +344,9 @@ void RX()
     ADCSRA = 0; ADCSRB = 0;                 // Disable Analog to Digital Converter (ADC)
     buffEmpty[0] = 1; buffEmpty[1] = 1;     // Set the buffers to empty
     #if defined (oversampling)              // If running the timer at double the sample rate
-        ICR1 = 10 * (800000/SAMPLE_RATE);   // Set timer top for 2X oversampling
+        ICR1 = 10 * ((RESOLUTION_BASE/2)/SAMPLE_RATE);   // Set timer top for 2X oversampling
     #else
-        ICR1 = 10 * (1600000/SAMPLE_RATE);  // Timer running at normal sample rate speed
+        ICR1 = 10 * (RESOLUTION_BASE/SAMPLE_RATE);  // Timer running at normal sample rate speed
     #endif
 
     radi.openWritingPipe(pipes[0]);         // Set up reading and writing pipes
@@ -566,7 +566,7 @@ void TX()
     ADMUX = (pin & 0x07) | _BV(REFS0); //Enable the ADC PIN and set 5v Analog Reference
     #endif
 
-    ICR1 = 10 * (1600000 / SAMPLE_RATE); //Timer counts from 0 to this value
+    ICR1 = 10 * (RESOLUTION_BASE / SAMPLE_RATE); //Timer counts from 0 to this value
 
     #if !defined (speakerTX)
     //If disabling/enabling the speaker, ramp it down
