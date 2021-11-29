@@ -470,9 +470,13 @@ void RF24Audio::broadcast(byte radioID)
 ISR(TIMER1_COMPA_vect) {                       // This interrupt vector sends the samples when a buffer is filled
     if (buffEmpty[!whichBuff] == 0) {          // If a buffer is ready to be sent
         a = !whichBuff;                        // Get the buffer # before allowing nested interrupts
-        //radi.startFastWrite(&buffer[a], 32);
-        radi.writeFast(&buffer[a], 32);
+        TIMSK1 &= ~(_BV(OCIE1A));              // Disable this interrupt vector
+        sei();                                 // Enable global interrupts
+        radi.startFastWrite(&buffer[a], 32, 1);// Do an IRQ friendly radio write        
+        cli();                                 // Disable global interrupts
         buffEmpty[a] = 1;                      // Mark the buffer as empty
+        TIMSK1 |= _BV(OCIE1A); 
+        
     }
 }
 
