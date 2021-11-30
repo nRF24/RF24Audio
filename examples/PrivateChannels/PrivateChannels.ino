@@ -31,20 +31,23 @@ to establish node-to-node communication between each other.
 #include <SPI.h>
 #include <RF24Audio.h>
 
-RF24 radio(7,8);		// Set radio up using pins 7 (CE) 8 (CS)
+RF24 radio(7,8);        // Set radio up using pins 7 (CE) 8 (CS)
 
 /********* Set the Radio Identifier Here ************/
-RF24Audio rfAudio(radio,0);	// Set up the audio using the radio, and set to radio number 0.
-                                // Setting the radio number is only important if one-to-one communication is desired
-                                // in a multi-node radio group. See the private
+RF24Audio rfAudio(radio,0); // Set up the audio using the radio, and set to radio number 0.
+                            // Setting the radio number is only important if one-to-one communication is desired
+                            // in a multi-node radio group. See the private
 
-void setup() {			
+void setup() {          
+
   Serial.begin(115200);
-  rfAudio.begin();		// The only thing to do is initialize the library.
+  rfAudio.begin();          // The only thing to do is initialize the library.
 
 }
 
 void loop() {
+  
+  rfAudio.handleButtons();
   
   if(Serial.available()){
       switch(Serial.read()){

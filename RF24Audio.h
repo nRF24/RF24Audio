@@ -120,7 +120,11 @@ public:
      */
     uint64_t getAddress(byte addressNo);
 
-
+    /**
+    * Handle button inputs. Must be called regularly for button functionality
+    */
+    void handleButtons();
+     
 private:
 	RF24& radio;
 	void timerStart();

@@ -89,9 +89,6 @@ void RF24Audio::begin()
     timerStart();			// Get the timer running
     RX();					// Start listening for transmissions
 
-    #if !defined (MANUAL_BUTTON_HANDLING)
-    TIMSK0 |= _BV(OCIE0B);
-    #endif
 }
 
 
@@ -124,9 +121,8 @@ void RF24Audio::timerStart()
     TCCR1B = _BV(WGM13) | _BV(WGM12) | _BV(CS10);      //CS10 = no prescaling
 }
 
-#if !defined (MANUAL_BUTTON_HANDLING)
 
-void handleButtons()
+void RF24Audio::handleButtons()
 {
     boolean state = digitalRead(TX_PIN); //Get the state of the transmitting pin
 
@@ -172,7 +168,7 @@ void handleButtons()
     }
 }
 
-#endif //Manual button handling override
+//#endif //Manual button handling override
 
 void rampDown()
 {
@@ -257,14 +253,6 @@ void RF24Audio::receive()
 {
     RX();
 }
-
-// Allows users to totally customize button handling or disable it
-#if !defined MANUAL_BUTTON_HANDLING
-    ISR(TIMER0_COMPB_vect) { // Non-blocking interrupt vector for button management. Is triggered ~1000 times/second by default on Arduino
-        handleButtons();     // Check for external button presses at the default timer0 rate
-    }
-#endif
-
 
 uint64_t RF24Audio::getAddress(byte addressNo)
 {

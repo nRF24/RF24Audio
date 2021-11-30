@@ -30,10 +30,10 @@ Note: Pin selections can be overridden by modifying the userConfig.h file includ
 #include <RF24Audio.h>
 //#include "printf.h"
 
-RF24 radio(7,8);		// Set radio up using pins 7 (CE) 8 (CS)
-RF24Audio rfAudio(radio,0);	// Set up the audio using the radio, and set to radio number 0.
-                                // Setting the radio number is only important if one-to-one communication is desired
-				// in a multi-node radio group. See the privateBroadcast() function.
+RF24 radio(7,8);            // Set radio up using pins 7 (CE) 8 (CS)
+RF24Audio rfAudio(radio,0); // Set up the audio using the radio, and set to radio number 0.
+                            // Setting the radio number is only important if one-to-one communication is desired
+                            // in a multi-node radio group. See the privateBroadcast() function.
 
 
 // This is a sketch used for demonstrating the multicast capabilities of the radios
@@ -50,10 +50,10 @@ Read Addy:  11 11 10 10 11   4    // Any radio listening on an address that is s
 Read Addy:  13 12 12 12 13   5
 */
 
-void setup() {	
-	
+void setup() {  
+    
   //Serial.begin(115200);
-  rfAudio.begin();		// The only thing to do is initialize the library.
+  rfAudio.begin();      // The only thing to do is initialize the library.
   //printf_begin();
   //radio.printDetails();
 
@@ -71,7 +71,8 @@ broadcast to that address **/
 
 void loop() {
   
-  // Audio playback and button handling is all managed internally.
+  rfAudio.handleButtons();
+  // Audio playback is all managed internally.
   // In this example, the radio is controlled by external buttons, so there is nothing to do here
   
 }

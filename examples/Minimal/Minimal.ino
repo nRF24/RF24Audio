@@ -34,21 +34,23 @@ Note: Pin selections can be overridden by modifying the userConfig.h file includ
 #include <SPI.h>
 #include <RF24Audio.h>
 
-RF24 radio(7,8);		// Set radio up using pins 7 (CE) 8 (CS)
-RF24Audio rfAudio(radio,1);	// Set up the audio using the radio, and set to radio number 0.
+RF24 radio(7,8);                // Set radio up using pins 7 (CE) 8 (CS)
+RF24Audio rfAudio(radio,1);     // Set up the audio using the radio, and set to radio number 0.
                                 // Setting the radio number is only important if one-to-one communication is desired
-				// in a multi-node radio group. See the privateBroadcast() function.
+                                // in a multi-node radio group. See the privateBroadcast() function.
 
-void setup() {			
+void setup() {          
 
-  rfAudio.begin();		// The only thing to do is initialize the library.
+  rfAudio.begin();              // Initialize the library.
 
 }
 
 void loop() {
   
-  // Audio playback and button handling is all managed internally.
+  rfAudio.handleButtons();
+  // Audio playback is all managed internally.
   // In this example, the radio is controlled by external buttons, so there is nothing to do here
+  // except handle the buttons.
   
 }
 

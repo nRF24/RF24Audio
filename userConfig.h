@@ -46,7 +46,6 @@
 
 /************  Optional/Advanced User Variables  ************/
 
-//#define MANUAL_BUTTON_HANDLING  // Disables button handling via timer0. Allow users to customize button handling
 
 /** Button pin to trigger recording & transmission */
 #define TX_PIN A1
