@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">RF24Audio
-   &#160;<span id="projectnumber">v1.0.8516dd6</span>
+   &#160;<span id="projectnumber">v1.0.f745c93</span>
    </div>
    <div id="projectbrief">Arduino Audio Streaming Realtime with NRF24L01 radios</div>
   </td>
@@ -101,10 +101,10 @@ $(function() {
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="RF24Audio_8h.html">RF24Audio.h</a>&gt;</span></div>
 <div class="line"><span class="comment">//#include &quot;printf.h&quot;</span></div>
 <div class="line"> </div>
-<div class="line">RF24 radio(7,8);        <span class="comment">// Set radio up using pins 7 (CE) 8 (CS)</span></div>
+<div class="line">RF24 radio(7,8);            <span class="comment">// Set radio up using pins 7 (CE) 8 (CS)</span></div>
 <div class="line"><a name="_a0"></a><a class="code" href="classRF24Audio.html">RF24Audio</a> rfAudio(radio,0); <span class="comment">// Set up the audio using the radio, and set to radio number 0.</span></div>
-<div class="line">                                <span class="comment">// Setting the radio number is only important if one-to-one communication is desired</span></div>
-<div class="line">                <span class="comment">// in a multi-node radio group. See the privateBroadcast() function.</span></div>
+<div class="line">                            <span class="comment">// Setting the radio number is only important if one-to-one communication is desired</span></div>
+<div class="line">                            <span class="comment">// in a multi-node radio group. See the privateBroadcast() function.</span></div>
 <div class="line"> </div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// This is a sketch used for demonstrating the multicast capabilities of the radios</span></div>
@@ -138,7 +138,8 @@ $(function() {
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">void</span> loop() {</div>
 <div class="line">  </div>
-<div class="line">  <span class="comment">// Audio playback and button handling is all managed internally.</span></div>
+<div class="line">  rfAudio.handleButtons();</div>
+<div class="line">  <span class="comment">// Audio playback is all managed internally.</span></div>
 <div class="line">  <span class="comment">// In this example, the radio is controlled by external buttons, so there is nothing to do here</span></div>
 <div class="line">  </div>
 <div class="line">}</div>
@@ -158,7 +159,7 @@ $(function() {
 </div><!-- fragment --> </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 29 2021 04:17:58 for RF24Audio by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Tue Nov 30 2021 00:02:52 for RF24Audio by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

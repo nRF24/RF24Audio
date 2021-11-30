@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">RF24Audio
-   &#160;<span id="projectnumber">v1.0.8516dd6</span>
+   &#160;<span id="projectnumber">v1.0.f745c93</span>
    </div>
    <div id="projectbrief">Arduino Audio Streaming Realtime with NRF24L01 radios</div>
   </td>
@@ -95,33 +95,40 @@ $(function() {
 <div class="line"><span class="preprocessor">#include &lt;RF24.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;SPI.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="RF24Audio_8h.html">RF24Audio.h</a>&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &quot;printf.h&quot;</span>     <span class="comment">// General includes for radio and audio lib</span></div>
+<div class="line"><span class="preprocessor">#include &quot;printf.h&quot;</span>             <span class="comment">// General includes for radio and audio lib</span></div>
 <div class="line"> </div>
-<div class="line">RF24 radio(7,8);        <span class="comment">// Set radio up using pins 7 (CE) 8 (CS)</span></div>
-<div class="line"><a name="_a0"></a><a class="code" href="classRF24Audio.html">RF24Audio</a> rfAudio(radio,1); <span class="comment">// Set up the audio using the radio, and set to radio number 0</span></div>
+<div class="line">RF24 radio(7,8);                <span class="comment">// Set radio up using pins 7 (CE) 8 (CS)</span></div>
+<div class="line"><a name="_a0"></a><a class="code" href="classRF24Audio.html">RF24Audio</a> rfAudio(radio,1);     <span class="comment">// Set up the audio using the radio, and set to radio number 0</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">void</span> setup() {          </div>
-<div class="line">  Serial.begin(115200);     <span class="comment">// Enable Arduino serial library</span></div>
+<div class="line">  Serial.begin(115200);         <span class="comment">// Enable Arduino serial library</span></div>
 <div class="line">  </div>
 <div class="line">  printf_begin();               <span class="comment">// Radio library uses printf to output debug info  </span></div>
 <div class="line">  radio.begin();                <span class="comment">// Must start the radio here, only if we want to print debug info</span></div>
 <div class="line">  radio.printDetails();         <span class="comment">// Print the info</span></div>
 <div class="line">  </div>
-<div class="line">  rfAudio.begin();      <span class="comment">// Start up the radio and audio libararies</span></div>
+<div class="line">  rfAudio.begin();              <span class="comment">// Start up the radio and audio libararies</span></div>
 <div class="line">}</div>
+<div class="line"> </div>
+<div class="line">uint32_t printTimer = 0;</div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">void</span> loop() {</div>
 <div class="line"> </div>
-<div class="line">    <span class="keywordflow">if</span>(Serial.available()){                                           <span class="comment">// Receive and analyze incoming serial data</span></div>
+<div class="line">    rfAudio.handleButtons();                      <span class="comment">//Handling of button inputs</span></div>
+<div class="line">    </div>
+<div class="line">    <span class="keywordflow">if</span>(Serial.available()){                       <span class="comment">// Receive and analyze incoming serial data</span></div>
 <div class="line">        <span class="keywordflow">switch</span>(Serial.read()){</div>
-<div class="line">            <span class="keywordflow">case</span> <span class="charliteral">&#39;r&#39;</span>: rfAudio.transmit(); <span class="keywordflow">break</span>;              <span class="comment">// Send an r or an s over serial to control playback</span></div>
+<div class="line">            <span class="keywordflow">case</span> <span class="charliteral">&#39;r&#39;</span>: rfAudio.transmit(); <span class="keywordflow">break</span>;  <span class="comment">// Send an r or an s over serial to control playback</span></div>
 <div class="line">            <span class="keywordflow">case</span> <span class="charliteral">&#39;s&#39;</span>: rfAudio.receive();  <span class="keywordflow">break</span>;</div>
-<div class="line">            <span class="keywordflow">case</span> <span class="charliteral">&#39;=&#39;</span>: rfAudio.volume(1);  <span class="keywordflow">break</span>;                      <span class="comment">// Control volume by sending = or - over serial</span></div>
+<div class="line">            <span class="keywordflow">case</span> <span class="charliteral">&#39;=&#39;</span>: rfAudio.volume(1);  <span class="keywordflow">break</span>;  <span class="comment">// Control volume by sending = or - over serial</span></div>
 <div class="line">            <span class="keywordflow">case</span> <span class="charliteral">&#39;-&#39;</span>: rfAudio.volume(0);  <span class="keywordflow">break</span>;</div>
 <div class="line">        }</div>
 <div class="line">    }</div>
-<div class="line">    Serial.println(<span class="stringliteral">&quot;test&quot;</span>);</div>
-<div class="line">    delay(1000);</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordflow">if</span>(millis() - printTimer &gt; 1000){</div>
+<div class="line">      printTimer = millis();</div>
+<div class="line">      Serial.println(<span class="stringliteral">&quot;test&quot;</span>);</div>
+<div class="line">    }</div>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line"> </div>
@@ -139,7 +146,7 @@ $(function() {
 </div><!-- fragment --> </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 29 2021 04:17:58 for RF24Audio by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Tue Nov 30 2021 00:02:52 for RF24Audio by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>
