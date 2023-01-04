@@ -1,4 +1,7 @@
 # RF24Audio - Realtime Audio Streaming Library for Arduino
+
+@tableofcontents
+
 This class implements a realtime audio streaming solution using nRF24L01(+) radios driven
 by the newly [optimized RF24 library fork](http://nRF24.github.com/RF24/).
 

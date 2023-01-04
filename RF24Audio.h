@@ -178,7 +178,8 @@ void RX();
  * @section Board Wiring
  * This page displays different options for wiring/board configuration.
  *
- * @image html "images/NRF1.jpg" height=25% width=25% <br>
+ * @image html "images/NRF1.jpg" height=25% width=25%
+ * 
  * Wiring diagram for DIY module connector. May not be needed depending on module:
  * @image html "images/RF24AudioBasic_LargeAntenna.jpg" height=45% width=45%
  * @image html "images/NRF2.jpg" height=20% width=20%
