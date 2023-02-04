@@ -9,25 +9,8 @@ on:
       - master
 
 jobs:
-  build-doxygen:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: checkout
-      uses: actions/checkout@v2
-    - name: overwrite doxygen tags
-      run: |
-        touch doxygenAction
-        echo "PROJECT_NUMBER = v1.0.${GITHUB_SHA:0:7}" >> doxygenAction
-        echo "@INCLUDE = doxygenAction" >> Doxyfile
-    - name: build doxygen
-      uses: mattnotmitt/doxygen-action@v1
-      with:
-          working-directory: '.'
-          doxyfile-path: './Doxyfile'
-    - name: upload to github pages
-      # if: ${{ github.event_name == 'release'}}
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./docs/html
+  build-docs:
+    uses: nRF24/.github/.github/workflows/build_docs.yaml@main
+    with:
+      deploy-gh-pages: ${{ github.event_name == 'push' }} # happens only on master branch
+    secrets: inherit
