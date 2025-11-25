@@ -106,7 +106,7 @@ public:
      * Get any of the preset radio addresses
      *
      * Useful for listening nodes who wish to create private or additional radio groups
-     * The library has 14 predefined radio addreses. All radios listen/write on the first
+     * The library has 14 predefined radio addresses. All radios listen/write on the first
      * two addresses (0, 1), and engage a private channel based on the radio number.
      * Radio 0 listens on address 2, Radio 1 on address 3, etc.
      *
@@ -171,19 +171,4 @@ void RX();
  * @example USB_Audio.ino
  * This sketch is demonstrates how to interact with the audio library directly using the core
  * RF24 radio library: http://nRF24.github.io/RF24/
- */
-
-/**
- * @page Setup Boards & Wiring
- * @section Board Wiring
- * This page displays different options for wiring/board configuration.
- *
- * @image html "images/NRF1.jpg" height=25% width=25%
- * 
- * Wiring diagram for DIY module connector. May not be needed depending on module:
- * @image html "images/RF24AudioBasic_LargeAntenna.jpg" height=45% width=45%
- * @image html "images/NRF2.jpg" height=20% width=20%
- * @image html "images/RF24AudioBasic_SmallAntenna.jpg" height=45% width=45%
- * Wiring diagram for SD streaming/multicast using TMRpcm library:
- * @image html "images/RF24Audio_FullSD.jpg" height=65% width=65%
  */
