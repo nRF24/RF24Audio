@@ -17,6 +17,8 @@
 # Project related configuration options
 #---------------------------------------------------------------------------
 
+PROJECT_ICON = images/favicon.ico
+
 # The PROJECT_NAME tag is a single word (or a sequence of words surrounded by
 # double-quotes, unless you are using Doxywizard) that should identify the
 # project for which the documentation is generated. This name is used in the
@@ -165,7 +167,7 @@ EXAMPLE_RECURSIVE      = YES
 # that contain images that are to be included in the documentation (see the
 # \image command).
 
-IMAGE_PATH             = ../images
+IMAGE_PATH             = ./images/
 
 # If the USE_MDFILE_AS_MAINPAGE tag refers to the name of a markdown file that
 # is part of the input, its contents will be placed on the main page
@@ -173,6 +175,12 @@ IMAGE_PATH             = ../images
 # and want to reuse the introduction page also for the doxygen output.
 
 USE_MDFILE_AS_MAINPAGE = main_page.md
+
+# Don't display the ugly/complicated "tree view" side menu.
+# And, restore the top (simpler) navigation bar.
+# As of doxygen v1.13.0, these default values changed from NO to YES
+GENERATE_TREEVIEW      = NO
+DISABLE_INDEX          = NO
 
 #---------------------------------------------------------------------------
 # Configuration options related to source browsing
@@ -231,6 +239,35 @@ HTML_EXTRA_STYLESHEET  = doxygen-custom.css
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
 HTML_COLORSTYLE = TOGGLE
+
+# If the TIMESTAMP tag is set different from NO then each generated page will contain
+# the date or date and time when the page was generated. Setting this to NO can help
+# when comparing the output of multiple runs.
+#
+# Possible values are: YES, NO, DATETIME and DATE.
+#
+# The default value is: NO.
+
+TIMESTAMP         = DATE
+
+# If the HTML_DYNAMIC_MENUS tag is set to YES then the generated HTML
+# documentation will contain a main index with vertical navigation menus that
+# are dynamically created via JavaScript. If disabled, the navigation index will
+# consists of multiple levels of tabs that are statically embedded in every HTML
+# page. Disable this option to support browsers that do not have JavaScript,
+# like the Qt help browser.
+# The default value is: YES.
+# This tag requires that the tag GENERATE_HTML is set to YES.
+
+HTML_DYNAMIC_MENUS     = NO
+
+# If the HTML_DYNAMIC_SECTIONS tag is set to YES then the generated HTML
+# documentation will contain sections that can be hidden and shown after the
+# page has loaded.
+# The default value is: NO.
+# This tag requires that the tag GENERATE_HTML is set to YES.
+
+HTML_DYNAMIC_SECTIONS  = YES
 
 #---------------------------------------------------------------------------
 # Configuration options related to the LaTeX output

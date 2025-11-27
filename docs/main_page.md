@@ -6,18 +6,20 @@ This class implements a realtime audio streaming solution using nRF24L01(+) radi
 by the newly [optimized RF24 library fork](http://nRF24.github.com/RF24/).
 
 ## Features
-- <b>User friendly setup and configuration:</b> For beginners too: Just connect a radio module, microphone, and speaker. The library handles the rest.
-- <b>Recording and broadcasting of audio</b> to multiple devices using only Arduino, RF24 modules and input/output (speaker/microphone) devices
-- <b>Multicast:</b> Enables broadcasting to all nodes, single nodes, or partial groups of nodes
-- <b>External controls:</b> Use external buttons or code to control audio streaming
-- <b>Volume control:</b> Use external buttons or code to control audio volume on receiving devices.
-- <b>Remote control:</b> Start recording remotely via radio commands (Currently cannot stop remote recording)
-- <b>LED Indicator/Visualization:</b> Indicates audio playback and amplitude.
-- <b>Customization:</b> Using the underlying RF24 core library allows custom interaction with audio devices running this library. Receive audio data
+
+- **User friendly setup and configuration:** For beginners too: Just connect a radio module, microphone, and speaker. The library handles the rest.
+- **Recording and broadcasting of audio** to multiple devices using only Arduino, RF24 modules and input/output (speaker/microphone) devices
+- **Multicast:** Enables broadcasting to all nodes, single nodes, or partial groups of nodes
+- **External controls:** Use external buttons or code to control audio streaming
+- **Volume control:** Use external buttons or code to control audio volume on receiving devices.
+- **Remote control:** Start recording remotely via radio commands (Currently cannot stop remote recording)
+- **LED Indicator/Visualization:** Indicates audio playback and amplitude.
+- **Customization:** Using the underlying RF24 core library allows custom interaction with audio devices running this library. Receive audio data
   and stream it to a PC over USB, create and broadcast computer generated audio in realtime, and more! See the [USB_Audio example](USB_Audio_8ino-example.html) for more info.
-- <b>Create additional node groups:</b> Allows nodes to join private broadcast groups, and multicast only within their group as desired. See advanced section below.
+- **Create additional node groups:** Allows nodes to join private broadcast groups, and multicast only within their group as desired. See advanced section below.
 
 ## How to learn more
+
 - [RF24Audio Library Class Documentation](classRF24Audio.html)
 - [RF24: Underlying radio driver (2014 - Newly Optimized)](http://nRF24.github.io/RF24/)
 - [My Blog: RF24 Optimization Overview](http://tmrh20.blogspot.com/2014/03/high-speed-data-transfers-and-wireless.html)
@@ -27,6 +29,7 @@ by the newly [optimized RF24 library fork](http://nRF24.github.com/RF24/).
 - [Newly Optimized RF24Network Class](http://nRF24.github.io/RF24Network/)
 
 ## Configuration and Setup
+
 The settings for the library will generally be detected automatically. To change from the default pin assignments etc, edit the
 userConfig.h file. The mandatory user options in the configuration file are shown below:
 
@@ -37,20 +40,22 @@ userConfig.h file. The mandatory user options in the configuration file are show
 ```
 
 ### Pin Assignments
-@see [the Setup page](Setup.html) for wiring diagrams
 
-- <b>Speakers:</b> Arduino Uno,Nano,etc: pins 9, 10   Arduino Mega: 11, 12  (Timer pins cannot be changed, but can use 1 pin and ground)
-- <b>pin A0:</b> Microphone/Input pin
-- <b>pin A1:</b> Transmission/Recording Start pin
-- <b>pin A2:</b> Volume Up
-- <b>pin A3:</b> Volume Down
-- <b>pin A4:</b> Trigger remote recording (Only working with dual devices)
-- <b>Cannot be changed:</b> LED Pin: Uno,Nano,etc: pin 6  Mega 2560: pin 13 (main LED pin)
+@see [the Setup page](setup.md) for wiring diagrams
 
-See http://arduino.cc/en/Tutorial/InputPullupSerial for info on how to wire the buttons to the pins
+- **Speakers:** Arduino Uno,Nano,etc: pins 9, 10   Arduino Mega: 11, 12  (Timer pins cannot be changed, but can use 1 pin and ground)
+- **pin A0:** Microphone/Input pin
+- **pin A1:** Transmission/Recording Start pin
+- **pin A2:** Volume Up
+- **pin A3:** Volume Down
+- **pin A4:** Trigger remote recording (Only working with dual devices)
+- **Cannot be changed:** LED Pin: Uno,Nano,etc: pin 6  Mega 2560: pin 13 (main LED pin)
+
+See <http://arduino.cc/en/Tutorial/InputPullupSerial> for info on how to wire the buttons to the pins
 See userConfig.h to change default pin assignments and options.
 
 ## Advanced Usage
+
 The radio pipes are defined as follows. For more complex multicast scenarios, radios can listen on any combination of pipes. <br>
 Use the getAddress(); function to access the address array.
 
@@ -70,8 +75,15 @@ const uint64_t pipes[14] = {0xABCDABCD71LL,
                             0x544d52685FLL,
                             0x544d526869LL};
 ```
-By default, all radios will open the same reading & writing pipes on the first two addresses.<br>
-Any radio that wishes to transmit, will reverse the addresses on the first two pipes, and begin to transmit to all the other nodes. <br>
-Every radio will automatically be assigned the first two addresses, then one of the remaining addresses as a private channel, based on its radio number: <br> (0 = pipes[2], 1 = pipes[3]) <br>
+
+By default, all radios will open the same reading & writing pipes on the first two addresses.
+
+Any radio that wishes to transmit, will reverse the addresses on the first two pipes, and begin to transmit to all the other nodes.
+
+Every radio will automatically be assigned the first two addresses, then one of the remaining addresses as a private channel, based on its radio number:
+
+```text
+(0 = pipes[2], 1 = pipes[3])
+```
 
 Additional addresses can be added by modifying the address array listed in userConfig.h
